@@ -1,5 +1,5 @@
 # ui_challenge2
-![UI!]"assets/images/ui.png"
+![UI!](assets/images/ui.png)
 A new Flutter project.
 
 ## Getting Started
