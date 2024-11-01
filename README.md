@@ -1,10 +1,11 @@
 # ui_challenge2
-
+![UI!]"assets/images/ui.png"
 A new Flutter project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project is a starting point for a Flutter Ui Challenge that required building a ui screen for chat app.
+i added some animtion to the code like animated list and tweenanimatidbuilder widget.
 
 A few resources to get you started if this is your first Flutter project:
 
