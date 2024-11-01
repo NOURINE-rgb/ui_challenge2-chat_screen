@@ -25,22 +25,23 @@ class _MainScreenState extends State<MainScreen> {
 
   GlobalKey<AnimatedListState> key = GlobalKey<AnimatedListState>();
   GlobalKey<AnimatedListState> key2 = GlobalKey<AnimatedListState>();
-
+  final _tween = Tween<double>(begin: 0, end: 1);
   final Tween<Offset> offset =
       Tween(begin: const Offset(1, 0), end: const Offset(0, 0));
   void addItems() {
-    for (int i = 0 ; i < userList.length; i++) {
-          Future.delayed(Duration(milliseconds: 100 * i),
-          () {
-            _userList.add(userList[i]);
-            if(i < avatarList.length){
+    for (int i = 0; i < userList.length; i++) {
+      Future.delayed(
+        Duration(milliseconds: 100 * i),
+        () {
+          _userList.add(userList[i]);
+          if (i < avatarList.length) {
             _avatarList.add(avatarList[i]);
             key2.currentState!.insertItem(i);
-            }
-            print("$i ************");
-              
-            key.currentState!.insertItem(i);
-          },
+          }
+          print("$i ************");
+
+          key.currentState!.insertItem(i);
+        },
       );
     }
   }
@@ -52,16 +53,23 @@ class _MainScreenState extends State<MainScreen> {
       body: ListView(
         children: [
           Container(
-            padding: const EdgeInsets.only(top: 25, left: 30),
+            padding: const EdgeInsets.only(top: 5, left: 30),
             height: 220,
             child: Column(
               // mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Chat with \nyour friends',
-                  // textAlign: TextAlign.c,
-                  style: Theme.of(context).textTheme.titleLarge,
+                TweenAnimationBuilder(
+                  tween: _tween,
+                  duration: const Duration(milliseconds: 500),
+                  child: Text(
+                    'Chat with \nyour friends',
+                    // textAlign: TextAlign.c,
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  builder: (context, value, child) => Padding(
+                      padding: EdgeInsets.only(top: value * 20),
+                      child: Opacity(opacity: value, child: child)),
                 ),
                 const SizedBox(
                   height: 25,
@@ -71,9 +79,9 @@ class _MainScreenState extends State<MainScreen> {
                   child: AnimatedList(
                     key: key2,
                     scrollDirection: Axis.horizontal,
-                    initialItemCount: avatarList.length,
-                    itemBuilder: (context, i,animation) => SlideTransition(
-                      position:animation.drive(offset),
+                    initialItemCount: _avatarList.length,
+                    itemBuilder: (context, i, animation) => SlideTransition(
+                      position: animation.drive(offset),
                       child: Container(
                         height: 60,
                         width: 60,
